@@ -12,7 +12,9 @@ INPUT_FILE = PROJECT_ROOT / "data" / "raw" / "Online Retail.xlsx"
 def clean_data(data: pd.DataFrame) -> pd.DataFrame:
     """Return a copy with duplicate rows and missing descriptions removed."""
     cleaned_data = data.drop_duplicates()
-    return cleaned_data.dropna(subset=["Description"])
+    cleaned_data = cleaned_data.dropna(subset=["Description"])
+    cleaned_data = cleaned_data.dropna(subset=["InvoiceNo"])
+    return cleaned_data
 
 
 def main() -> None:
