@@ -22,6 +22,8 @@ def validate_data(data: pd.DataFrame) -> None:
     print("Duplicate records:", duplicate_count)
     print("Negative prices:", negative_price_count)
     print("Zero quantities:", zero_quantity_count)
+    print("Missing descriptions:", missing_description_count)
+    print("Missing invoice numbers:", missing_invoice_count)
 
     if (duplicate_count == 0
             and negative_price_count == 0
@@ -36,36 +38,10 @@ def main() -> None:
 
     data = pd.read_excel(INPUT_FILE)
 
-    print("Available columns:")
-    print(data.columns)
-
     cleaned_data = clean_data(data)
 
-    # Data quality checks
-    duplicate_count = cleaned_data.duplicated().sum()
+    validate_data(cleaned_data)
 
-    negative_price_count = (
-        cleaned_data[cleaned_data['UnitPrice'] < 0].shape[0]
-    )
-
-    zero_quantity_count = (
-        cleaned_data[cleaned_data['Quantity'] == 0].shape[0]
-    )
-
-    # Display validation results
-    print("\nData Quality Report")
-    print("-------------------")
-    print("Duplicate records:", duplicate_count)
-    print("Negative prices:", negative_price_count)
-    print("Zero quantities:", zero_quantity_count)
-
-    # Final validation
-    if (duplicate_count == 0
-            and negative_price_count == 0
-            and zero_quantity_count == 0):
-        print("\nValidation passed")
-    else:
-        print("\nValidation failed")
 
 
 if __name__ == "__main__":
