@@ -22,6 +22,12 @@ upload_file_to_s3(
     "raw/Online Retail.xlsx"
 )
 
+upload_file_to_s3(
+    "data/processed/retail_cleaned.parquet",
+    "ecommerce-data-pipeline-meenakshi",
+    "processed/retail_cleaned.parquet"
+)
+
 print("File upload process completed.")
 
 def list_s3_files(bucket_name: str) -> None:
